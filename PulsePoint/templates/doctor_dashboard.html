@@ -1,0 +1,97 @@
+{% extends 'hospital/base.html' %}
+{% load static %}
+
+{% block title %}Doctor Dashboard | MediCore{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'hospital/css/doctor_dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="dashboard">
+
+    <h1>Doctor Dashboard</h1>
+    <p>Welcome, Dr. {{ request.user.username }}!</p>
+
+    <div class="dashboard-cards">
+
+        <div class="card">
+            <h3>Today's Appointments</h3>
+            <p>View your scheduled appointments.</p>
+            <a href="{% url 'doctor_appointments' %}">View Appointments</a>
+        </div>
+
+        <div class="card">
+            <h3>My Patients</h3>
+            <p>View your assigned patients.</p>
+            <a href="{% url 'doctor_patients' %}">View Patients</a>
+        </div>
+
+        <div class="card">
+            <h3>Medical Records</h3>
+            <p>Review authorized patient medical records.</p>
+            <a href="{% url 'doctor_records' %}">View Records</a>
+        </div>
+
+        <div class="card">
+            <h3>Prescriptions</h3>
+            <p>Create and manage patient prescriptions.</p>
+            <a href="{% url 'doctor_prescriptions' %}">Manage Prescriptions</a>
+        </div>
+
+        <div class="card">
+            <h3>Laboratory Requests</h3>
+            <p>Request laboratory tests for patients.</p>
+            <a href="{% url 'lab_requests' %}">Manage Requests</a>
+        </div>
+
+        <div class="card">
+            <h3>My Schedule</h3>
+            <p>Manage your availability.</p>
+            <a href="{% url 'doctor_schedule' %}">View Schedule</a>
+        </div>
+
+    </div>
+
+    <section>
+        <h2>Appointment List</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Patient Name</th>
+                    <th>Appointment Date</th>
+                    <th>Time</th>
+                    <th>Reason</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for appointment in appointments %}
+                <tr>
+                    <td>{{ appointment.patient }}</td>
+                    <td>{{ appointment.date }}</td>
+                    <td>{{ appointment.time }}</td>
+                    <td>{{ appointment.reason }}</td>
+                    <td>{{ appointment.status }}</td>
+                    <td>
+                        <a href="{% url 'consultation' appointment.id %}">
+                            View Details
+                        </a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6">No appointments available.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+
+</section>
+
+{% endblock %}

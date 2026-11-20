@@ -1,0 +1,69 @@
+{% extends 'hospital/base.html' %}
+{% load static %}
+
+{% block title %}Our Doctors | MediCore{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/doctors.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="doctors-section">
+
+    <h1>Find Your Doctor</h1>
+    <p>Explore our experienced healthcare professionals.</p>
+
+    <form method="GET">
+        <input type="text" name="search"
+               placeholder="Search doctor or specialization"
+               value="{{ request.GET.search }}">
+
+        <select name="department">
+            <option value="">All Departments</option>
+            {% for department in departments %}
+            <option value="{{ department.id }}">
+                {{ department.name }}
+            </option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">Search</button>
+    </form>
+
+    <div class="doctor-container">
+
+        {% for doctor in doctors %}
+
+        <div class="doctor-card">
+
+            {% if doctor.profile_image %}
+            <img src="{{ doctor.profile_image.url }}"
+                 alt="Doctor profile">
+            {% endif %}
+
+            <h2>Dr. {{ doctor.user.get_full_name }}</h2>
+
+            <p>Specialization: {{ doctor.specialization }}</p>
+
+            <p>Department: {{ doctor.department.name }}</p>
+
+            <p>Qualification: {{ doctor.qualification }}</p>
+
+            <a href="{% url 'book_appointment' %}">
+                Book Appointment
+            </a>
+
+        </div>
+
+        {% empty %}
+
+        <p>No doctors found.</p>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endblock %}

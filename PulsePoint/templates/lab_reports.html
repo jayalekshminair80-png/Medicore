@@ -1,0 +1,64 @@
+{% extends 'hospital/base.html' %}
+{% load static %}
+
+{% block title %}Laboratory Reports | MediCore{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/lab_reports.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="lab-reports">
+
+    <h1>Laboratory Reports</h1>
+
+    <table>
+
+        <thead>
+            <tr>
+                <th>Test ID</th>
+                <th>Test Name</th>
+                <th>Requested Date</th>
+                <th>Status</th>
+                <th>Result</th>
+                <th>Report</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            {% for report in reports %}
+
+            <tr>
+                <td>{{ report.test.id }}</td>
+                <td>{{ report.test.test_name }}</td>
+                <td>{{ report.test.created_at }}</td>
+                <td>{{ report.test.status }}</td>
+                <td>{{ report.result|default:"Pending" }}</td>
+
+                <td>
+                    {% if report.report_file %}
+                    <a href="{{ report.report_file.url }}"
+                       target="_blank">View Report</a>
+                    {% else %}
+                    Not Available
+                    {% endif %}
+                </td>
+            </tr>
+
+            {% empty %}
+
+            <tr>
+                <td colspan="6">No laboratory reports available.</td>
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</section>
+
+{% endblock %}

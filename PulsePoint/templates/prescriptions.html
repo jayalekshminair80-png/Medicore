@@ -1,0 +1,68 @@
+{% extends 'hospital/base.html' %}
+{% load static %}
+
+{% block title %}Prescriptions | MediCore{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/prescriptions.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="prescriptions-section">
+
+    <h1>My Prescriptions</h1>
+
+    {% for prescription in prescriptions %}
+
+    <div class="prescription-card">
+
+        <h2>Prescription #{{ prescription.id }}</h2>
+
+        <p><strong>Doctor:</strong>
+            Dr. {{ prescription.doctor.user.get_full_name }}
+        </p>
+
+        <p><strong>Date:</strong> {{ prescription.date }}</p>
+
+        <h3>Prescribed Medicines</h3>
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Medicine</th>
+                    <th>Dosage</th>
+                    <th>Frequency</th>
+                    <th>Duration</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for item in prescription.items.all %}
+
+                <tr>
+                    <td>{{ item.medicine.name }}</td>
+                    <td>{{ item.dosage }}</td>
+                    <td>{{ item.frequency }}</td>
+                    <td>{{ item.duration }}</td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    {% empty %}
+
+    <p>No prescriptions available.</p>
+
+    {% endfor %}
+
+</section>
+
+{% endblock %}

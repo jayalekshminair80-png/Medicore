@@ -1,0 +1,208 @@
+/* ==========================================================================
+   PULSEPOINT / MEDICORE - PREMIUM LOGIN (login.css)
+   ========================================================================== */
+
+@import url('base.css');
+
+.login-section {
+  max-width: 480px;
+  margin: 50px auto 80px auto;
+  background: var(--bg-card);
+  padding: 48px 42px;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-xl);
+  position: relative;
+  overflow: hidden;
+}
+
+.login-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+}
+
+.login-section h1 {
+  font-size: 2.15rem;
+  font-weight: 800;
+  color: var(--text-main);
+  text-align: center;
+  margin-bottom: 8px;
+  letter-spacing: -0.03em;
+}
+
+.login-section > p:first-of-type {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* ==========================================================================
+   ALERT & ERROR MESSAGES
+   ========================================================================== */
+.alert,
+.nonfield-error {
+  display: block;
+  padding: 14px 18px;
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 22px;
+  line-height: 1.5;
+  box-sizing: border-box;
+}
+
+.alert p,
+.nonfield-error p {
+  margin: 0;
+  padding: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.alert-error,
+.alert-danger,
+.nonfield-error {
+  background-color: var(--danger-50);
+  color: var(--danger-dark);
+  border: 1.5px solid #fecaca;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.12);
+}
+
+.alert-warning {
+  background-color: var(--warning-50);
+  color: var(--warning-dark);
+  border: 1.5px solid #fde68a;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.12);
+}
+
+.alert-success {
+  background-color: var(--success-50);
+  color: var(--success-dark);
+  border: 1.5px solid #bbf7d0;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.12);
+}
+
+.alert-info {
+  background-color: var(--primary-50);
+  color: var(--primary-dark);
+  border: 1.5px solid #bae6fd;
+}
+
+/* Field-Level Errors (under input) */
+.field-error {
+  color: #dc2626 !important;
+  font-size: 0.82rem !important;
+  font-weight: 600 !important;
+  margin-top: -12px !important;
+  margin-bottom: 16px !important;
+  display: flex !important;
+  align-items: center;
+  gap: 6px;
+  line-height: 1.4;
+  text-align: left !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+.field-error::before {
+  content: '⚠';
+  font-size: 0.88rem;
+  color: #ef4444;
+  flex-shrink: 0;
+}
+
+/* Form Styles */
+.login-section form {
+  padding: 0;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+}
+
+.login-section form div {
+  margin-bottom: 20px;
+}
+
+.login-section label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  letter-spacing: 0.03em;
+}
+
+.login-section input {
+  width: 100%;
+  padding: 13px 18px;
+  font-size: 0.96rem;
+  background-color: var(--bg-subtle);
+  border: 1.5px solid var(--border-light);
+  border-radius: var(--radius-md);
+  color: var(--text-main);
+  transition: var(--transition-normal);
+  box-sizing: border-box;
+}
+
+.login-section input:focus {
+  background-color: #ffffff;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px var(--primary-glow);
+}
+
+/* Red Highlight on Input when Field Has an Error */
+.login-section div:has(.field-error) input {
+  border-color: #ef4444;
+  background-color: #fffbfb;
+}
+
+.login-section div:has(.field-error) input:focus {
+  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.2);
+}
+
+.login-section button[type="submit"] {
+  width: 100%;
+  padding: 14px;
+  font-size: 1rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary) 0%, #0369a1 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  margin-top: 10px;
+  transition: var(--transition-normal);
+  box-shadow: 0 4px 14px var(--primary-glow);
+}
+
+.login-section button[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(2, 132, 199, 0.4);
+}
+
+.login-section > p:last-child {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-top: 28px;
+}
+
+.login-section > p:last-child a {
+  color: var(--primary);
+  font-weight: 700;
+  text-decoration: none;
+  transition: var(--transition-fast);
+}
+
+.login-section > p:last-child a:hover {
+  color: var(--primary-dark);
+  text-decoration: underline;
+}

@@ -1,0 +1,67 @@
+{% extends 'hospital/base.html' %}
+{% load static %}
+
+{% block title %}Emergency Management | MediCore{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/emergency.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="emergency-section">
+
+    <h1>Emergency Management</h1>
+
+    <a href="{% url 'register_emergency' %}">
+        Register Emergency Case
+    </a>
+
+    <table>
+
+        <thead>
+            <tr>
+                <th>Case ID</th>
+                <th>Patient Name</th>
+                <th>Contact Number</th>
+                <th>Priority</th>
+                <th>Assigned Department</th>
+                <th>Case Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            {% for case in emergency_cases %}
+
+            <tr>
+                <td>{{ case.id }}</td>
+                <td>{{ case.patient_name }}</td>
+                <td>{{ case.contact_number }}</td>
+                <td>{{ case.priority }}</td>
+                <td>{{ case.department }}</td>
+                <td>{{ case.status }}</td>
+
+                <td>
+                    <a href="{% url 'emergency_detail' case.id %}">
+                        View Details
+                    </a>
+                </td>
+            </tr>
+
+            {% empty %}
+
+            <tr>
+                <td colspan="7">No emergency cases available.</td>
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</section>
+
+{% endblock %}

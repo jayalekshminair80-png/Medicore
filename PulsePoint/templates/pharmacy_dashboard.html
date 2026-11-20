@@ -1,0 +1,91 @@
+{% extends 'hospital/base.html' %}
+{% load static %}
+
+{% block title %}Pharmacy Dashboard | MediCore{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'hospital/css/pharmacy_dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="dashboard">
+
+    <h1>Pharmacy Management</h1>
+    <p>Welcome, {{ request.user.username }}!</p>
+
+    <div class="dashboard-cards">
+
+        <div class="card">
+            <h3>Medicine Inventory</h3>
+            <p>View and manage available medicines.</p>
+            <a href="{% url 'medicine_list' %}">View Inventory</a>
+        </div>
+
+        <div class="card">
+            <h3>Add Medicine</h3>
+            <p>Add new medicines to inventory.</p>
+            <a href="{% url 'add_medicine' %}">Add Medicine</a>
+        </div>
+
+        <div class="card">
+            <h3>Prescriptions</h3>
+            <p>View prescriptions submitted by doctors.</p>
+            <a href="{% url 'pharmacy_prescriptions' %}">View Prescriptions</a>
+        </div>
+
+        <div class="card">
+            <h3>Stock Management</h3>
+            <p>Monitor available medicine stock.</p>
+            <a href="{% url 'stock_management' %}">Manage Stock</a>
+        </div>
+
+        <div class="card">
+            <h3>Expiry Management</h3>
+            <p>Monitor medicine expiry dates.</p>
+            <a href="{% url 'expiry_management' %}">View Expiry Details</a>
+        </div>
+
+        <div class="card">
+            <h3>Sales History</h3>
+            <p>View pharmacy sales and billing records.</p>
+            <a href="{% url 'pharmacy_sales' %}">View Sales</a>
+        </div>
+
+    </div>
+
+    <section>
+        <h2>Medicine Inventory</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Medicine</th>
+                    <th>Category</th>
+                    <th>Quantity</th>
+                    <th>Expiry Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for medicine in medicines %}
+                <tr>
+                    <td>{{ medicine.name }}</td>
+                    <td>{{ medicine.category }}</td>
+                    <td>{{ medicine.stock }}</td>
+                    <td>{{ medicine.expiry_date }}</td>
+                    <td>{{ medicine.status }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">No medicines available.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+
+</section>
+
+{% endblock %}

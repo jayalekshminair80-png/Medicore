@@ -1,0 +1,124 @@
+{% extends 'hospital/base.html' %}
+{% load static %}
+
+{% block title %}Admin Dashboard | MediCore{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'hospital/css/admin_dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="dashboard">
+
+    <h1>Hospital Administration</h1>
+    <p>Welcome, {{ request.user.username }}!</p>
+    <p>Monitor and manage hospital operations.</p>
+
+    <div class="statistics">
+
+        <div class="stat-card">
+            <h3>Total Patients</h3>
+            <p>{{ total_patients }}</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Total Doctors</h3>
+            <p>{{ total_doctors }}</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Total Appointments</h3>
+            <p>{{ total_appointments }}</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Available Beds</h3>
+            <p>{{ available_beds }}</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Pending Payments</h3>
+            <p>{{ pending_payments }}</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Emergency Cases</h3>
+            <p>{{ emergency_cases }}</p>
+        </div>
+
+    </div>
+
+    <div class="dashboard-cards">
+
+        <div class="card">
+            <h3>Patient Management</h3>
+            <p>Manage registered patients.</p>
+            <a href="{% url 'patient_list' %}">Manage Patients</a>
+        </div>
+
+        <div class="card">
+            <h3>Doctor Management</h3>
+            <p>Add and manage hospital doctors.</p>
+            <a href="{% url 'doctor_list' %}">Manage Doctors</a>
+        </div>
+
+        <div class="card">
+            <h3>Staff Management</h3>
+            <p>Manage hospital employees and roles.</p>
+            <a href="{% url 'staff_list' %}">Manage Staff</a>
+        </div>
+
+        <div class="card">
+            <h3>Department Management</h3>
+            <p>Manage hospital departments.</p>
+            <a href="{% url 'department_list' %}">Manage Departments</a>
+        </div>
+
+        <div class="card">
+            <h3>Appointment Management</h3>
+            <p>Monitor hospital appointments.</p>
+            <a href="{% url 'appointment_list' %}">View Appointments</a>
+        </div>
+
+        <div class="card">
+            <h3>Pharmacy Management</h3>
+            <p>Monitor medicine inventory.</p>
+            <a href="{% url 'medicine_list' %}">Manage Pharmacy</a>
+        </div>
+
+        <div class="card">
+            <h3>Laboratory Management</h3>
+            <p>Monitor laboratory services.</p>
+            <a href="{% url 'lab_requests' %}">Manage Laboratory</a>
+        </div>
+
+        <div class="card">
+            <h3>Billing Management</h3>
+            <p>Manage hospital invoices and payments.</p>
+            <a href="{% url 'billing' %}">Manage Billing</a>
+        </div>
+
+        <div class="card">
+            <h3>Bed Management</h3>
+            <p>Monitor room and bed availability.</p>
+            <a href="{% url 'beds' %}">Manage Beds</a>
+        </div>
+
+        <div class="card">
+            <h3>Emergency Management</h3>
+            <p>Monitor emergency cases.</p>
+            <a href="{% url 'emergency' %}">Manage Emergencies</a>
+        </div>
+
+        <div class="card">
+            <h3>Reports and Analytics</h3>
+            <p>Review hospital performance reports.</p>
+            <a href="{% url 'analytics' %}">View Analytics</a>
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

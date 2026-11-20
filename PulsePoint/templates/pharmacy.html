@@ -1,0 +1,78 @@
+{% extends 'hospital/base.html' %}
+{% load static %}
+
+{% block title %}Pharmacy Management | MediCore{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/pharmacy.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="pharmacy-section">
+
+    <h1>Pharmacy Management</h1>
+
+    <a href="{% url 'add_medicine' %}">Add New Medicine</a>
+
+    <form method="GET">
+        <input type="text" name="search"
+               placeholder="Search medicine"
+               value="{{ request.GET.search }}">
+        <button type="submit">Search</button>
+    </form>
+
+    <h2>Medicine Inventory</h2>
+
+    <table>
+
+        <thead>
+            <tr>
+                <th>Medicine ID</th>
+                <th>Medicine Name</th>
+                <th>Category</th>
+                <th>Stock</th>
+                <th>Price</th>
+                <th>Expiry Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            {% for medicine in medicines %}
+
+            <tr>
+                <td>{{ medicine.id }}</td>
+                <td>{{ medicine.name }}</td>
+                <td>{{ medicine.category }}</td>
+                <td>{{ medicine.stock }}</td>
+                <td>{{ medicine.price }}</td>
+                <td>{{ medicine.expiry_date }}</td>
+
+                <td>
+                    <a href="{% url 'edit_medicine' medicine.id %}">
+                        Edit
+                    </a>
+
+                    <a href="{% url 'delete_medicine' medicine.id %}">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+
+            {% empty %}
+
+            <tr>
+                <td colspan="7">No medicines found.</td>
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</section>
+
+{% endblock %}

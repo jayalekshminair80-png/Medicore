@@ -1,0 +1,82 @@
+{% extends 'hospital/base.html' %}
+{% load static %}
+
+{% block title %}Home | MediCore{% endblock %}}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}}
+
+{% block content %}
+
+<section class="hero">
+    <div class="hero-content">
+        <h1>Welcome to MediCore</h1>
+
+        <h2>Your Health, Our Priority</h2>
+
+        <p>
+            Experience smarter healthcare management through
+            a centralized digital hospital platform.
+        </p>
+
+        <a href="{% url 'register' %}">Get Started</a>
+        <a href="{% url 'login' %}">Login</a>
+    </div>
+</section>
+
+<section id="about">
+    <h2>About MediCore</h2>
+
+    <p>
+        MediCore is a Smart Hospital Management System designed
+        to simplify healthcare services by connecting patients,
+        doctors and hospital staff through one platform.
+    </p>
+</section>
+
+<section id="services">
+    <h2>Our Services</h2>
+
+    <div class="service-container">
+
+        <div class="service-card">
+            <h3>Online Appointments</h3>
+            <p>Book and manage doctor appointments easily.</p>
+        </div>
+
+        <div class="service-card">
+            <h3>Digital Medical Records</h3>
+            <p>Access authorized medical records and reports.</p>
+        </div>
+
+        <div class="service-card">
+            <h3>Pharmacy Management</h3>
+            <p>Manage prescriptions and medicine availability.</p>
+        </div>
+
+        <div class="service-card">
+            <h3>Laboratory Services</h3>
+            <p>View laboratory test status and reports.</p>
+        </div>
+
+        <div class="service-card">
+            <h3>Emergency Management</h3>
+            <p>Support hospital emergency case coordination.</p>
+        </div>
+
+        <div class="service-card">
+            <h3>Billing Management</h3>
+            <p>View invoices and payment information.</p>
+        </div>
+
+    </div>
+</section>
+
+<section id="contact">
+    <h2>Contact MediCore</h2>
+    <p>Email: support@medicore.com</p>
+    <p>Phone: +91 9876543210</p>
+</section>
+
+{% endblock %}

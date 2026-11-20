@@ -1,0 +1,85 @@
+{% extends 'hospital/base.html' %}
+{% load static %}
+
+{% block title %}Laboratory Dashboard | MediCore{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'hospital/css/laboratory_dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="dashboard">
+
+    <h1>Laboratory Management</h1>
+    <p>Welcome, {{ request.user.username }}!</p>
+
+    <div class="dashboard-cards">
+
+        <div class="card">
+            <h3>Test Requests</h3>
+            <p>View laboratory tests requested by doctors.</p>
+            <a href="{% url 'lab_requests' %}">View Requests</a>
+        </div>
+
+        <div class="card">
+            <h3>Register Samples</h3>
+            <p>Record and manage patient samples.</p>
+            <a href="{% url 'sample_registration' %}">Register Sample</a>
+        </div>
+
+        <div class="card">
+            <h3>Pending Tests</h3>
+            <p>Monitor tests awaiting completion.</p>
+            <a href="{% url 'pending_tests' %}">View Pending Tests</a>
+        </div>
+
+        <div class="card">
+            <h3>Upload Reports</h3>
+            <p>Enter results and upload laboratory reports.</p>
+            <a href="{% url 'upload_report' %}">Upload Report</a>
+        </div>
+
+        <div class="card">
+            <h3>Completed Tests</h3>
+            <p>View completed laboratory tests.</p>
+            <a href="{% url 'completed_tests' %}">View Completed Tests</a>
+        </div>
+
+    </div>
+
+    <section>
+        <h2>Recent Laboratory Requests</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Patient</th>
+                    <th>Test Name</th>
+                    <th>Requested By</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for test in lab_tests %}
+                <tr>
+                    <td>{{ test.patient }}</td>
+                    <td>{{ test.test_name }}</td>
+                    <td>{{ test.doctor }}</td>
+                    <td>{{ test.created_at }}</td>
+                    <td>{{ test.status }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">No laboratory requests available.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+
+</section>
+
+{% endblock %}

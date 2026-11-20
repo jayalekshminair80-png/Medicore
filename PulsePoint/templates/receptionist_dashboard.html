@@ -1,0 +1,89 @@
+{% extends 'hospital/base.html' %}
+{% load static %}
+
+{% block title %}Receptionist Dashboard | MediCore{% endblock %}}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'hospital/css/receptionist_dashboard.css' %}">
+{% endblock %}}
+
+{% block content %}
+
+<section class="dashboard">
+
+    <h1>Receptionist Dashboard</h1>
+    <p>Welcome, {{ request.user.username }}!</p>
+
+    <div class="dashboard-cards">
+
+        <div class="card">
+            <h3>Register Patient</h3>
+            <p>Add new patients to the hospital system.</p>
+            <a href="{% url 'patient_registration' %}">Register Patient</a>
+        </div>
+
+        <div class="card">
+            <h3>Patient Details</h3>
+            <p>Search and manage patient information.</p>
+            <a href="{% url 'patient_list' %}">View Patients</a>
+        </div>
+
+        <div class="card">
+            <h3>Book Appointment</h3>
+            <p>Schedule appointments for patients.</p>
+            <a href="{% url 'book_appointment' %}">Book Now</a>
+        </div>
+
+        <div class="card">
+            <h3>Appointment Management</h3>
+            <p>View and manage appointment schedules.</p>
+            <a href="{% url 'appointment_list' %}">View Appointments</a>
+        </div>
+
+        <div class="card">
+            <h3>Patient Check-in</h3>
+            <p>Manage patient arrivals and queues.</p>
+            <a href="{% url 'patient_checkin' %}">Check-in</a>
+        </div>
+
+    </div>
+
+    <section>
+        <h2>Today's Appointments</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Patient</th>
+                    <th>Doctor</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for appointment in appointments %}
+                <tr>
+                    <td>{{ appointment.patient }}</td>
+                    <td>{{ appointment.doctor }}</td>
+                    <td>{{ appointment.time }}</td>
+                    <td>{{ appointment.status }}</td>
+                    <td>
+                        <a href="{% url 'appointment_detail' appointment.id %}">
+                            View
+                        </a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">No appointments scheduled.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+
+</section>
+
+{% endblock %}
