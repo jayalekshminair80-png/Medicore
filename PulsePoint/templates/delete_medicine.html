@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete Medicine | MediCore{% endblock %}
+
+{% block content %}
+<section class="pharmacy-section">
+    <h1>Delete Medicine</h1>
+    <p>Are you sure you want to delete <strong>{{ medicine.name }}</strong>?</p>
+
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit">Confirm Delete</button>
+    </form>
+
+    <p><a href="{% url 'pharmacy' %}">Cancel and return to inventory</a></p>
+</section>
+{% endblock %}

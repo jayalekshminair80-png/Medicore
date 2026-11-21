@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Bed | MediCore{% endblock %}
+
+{% block content %}
+<section class="bed-management">
+    <h1>Add New Bed</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save Bed</button>
+    </form>
+
+    <p><a href="{% url 'beds' %}">Back to Bed Management</a></p>
+</section>
+{% endblock %}

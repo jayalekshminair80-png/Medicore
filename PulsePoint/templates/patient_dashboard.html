@@ -1,10 +1,10 @@
-{% extends 'hospital/base.html' %}
+{% extends 'base.html' %}
 {% load static %}
 
 {% block title %}Patient Dashboard | MediCore{% endblock %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'hospital/css/patient_dashboard.css' %}">
+<link rel="stylesheet" href="{% static 'css/patient_dashboard.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -13,6 +13,9 @@
 
     <h1>Patient Dashboard</h1>
     <p>Welcome {{ username }}!</p>
+    {% if patient.profile %}
+    <img src="{{ patient.profile.url }}" alt="Profile picture" width="120">
+    {% endif %}
     <p>Manage your healthcare services from one place.</p>
 
     <div class="dashboard-cards">
@@ -66,21 +69,28 @@
                     <th>Date</th>
                     <th>Time</th>
                     <th>Status</th>
+                    <th>Action</th>
                 </tr>
             </thead>
 
             <tbody>
                 {% for appointment in appointments %}
                 <tr>
-                    <td>{{ appointment.doctor }}</td>
-                    <td>{{ appointment.doctor.department }}</td>
-                    <td>{{ appointment.date }}</td>
-                    <td>{{ appointment.time }}</td>
+                    <td>Dr. {{ appointment.doctor_name }}</td>
+                    <td>{{ appointment.doctor_specialization }}</td>
+                    <td>{{ appointment.appointment_date|date:"M d, Y" }}</td>
+                    <td>{{ appointment.appointment_date|time:"g:i A" }}</td>
                     <td>{{ appointment.status }}</td>
+                    <td>
+                        <form method="post" action="{% url 'cancel_appointment' appointment.id %}">
+                            {% csrf_token %}
+                            <button type="submit" onclick="return confirm('Are you sure you want to cancel this appointment?')">Cancel</button>
+                        </form>
+                    </td>
                 </tr>
                 {% empty %}
                 <tr>
-                    <td colspan="5">No upcoming appointments.</td>
+                    <td colspan="6">No upcoming appointments.</td>
                 </tr>
                 {% endfor %}
             </tbody>

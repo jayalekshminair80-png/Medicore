@@ -1,4 +1,4 @@
-{% extends 'hospital/base.html' %}
+{% extends 'hbase.html' %}
 {% load static %}
 
 {% block title %}My Profile | MediCore{% endblock %}
@@ -14,23 +14,17 @@
     <h1>My Profile</h1>
 
     <div class="profile-details">
+    <h2>Personal Information</h2>
 
-        <h2>Personal Information</h2>
+    {% if patient.profile %}
+        <img src="{{ patient.profile.url }}" alt="Profile picture" width="120">
+    {% endif %}
 
-        <p><strong>Patient ID:</strong> {{ patient.patient_id }}</p>
-        <p><strong>Full Name:</strong> {{ patient.user.get_full_name }}</p>
-        <p><strong>Email:</strong> {{ patient.user.email }}</p>
-        <p><strong>Phone:</strong> {{ patient.phone }}</p>
-        <p><strong>Date of Birth:</strong> {{ patient.date_of_birth }}</p>
-        <p><strong>Gender:</strong> {{ patient.gender }}</p>
-        <p><strong>Blood Group:</strong> {{ patient.blood_group }}</p>
-        <p><strong>Address:</strong> {{ patient.address }}</p>
-
-        <a href="{% url 'edit_patient_profile' %}">
-            Edit Profile
-        </a>
-
-    </div>
+    <p><strong>Full Name:</strong> {{ patient.full_name }}</p>
+    <p><strong>Username:</strong> {{ patient.username }}</p>
+    <p><strong>Email:</strong> {{ patient.email }}</p>
+    <p><strong>Phone:</strong> {{ patient.phone }}</p>
+</div>
 
 </section>
 

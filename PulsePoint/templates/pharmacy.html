@@ -1,4 +1,4 @@
-{% extends 'hospital/base.html' %}
+{% extends 'base.html' %}
 {% load static %}
 
 {% block title %}Pharmacy Management | MediCore{% endblock %}
@@ -25,53 +25,39 @@
     <h2>Medicine Inventory</h2>
 
     <table>
+    <thead>
+        <tr>
+            <th>Medicine ID</th>
+            <th>Medicine Name</th>
+            <th>Description</th>
+            <th>Stock</th>
+            <th>Price</th>
+            <th>Expiry Date</th>
+            <th>Action</th>
+        </tr>
+    </thead>
 
-        <thead>
-            <tr>
-                <th>Medicine ID</th>
-                <th>Medicine Name</th>
-                <th>Category</th>
-                <th>Stock</th>
-                <th>Price</th>
-                <th>Expiry Date</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-
-        <tbody>
-
-            {% for medicine in medicines %}
-
-            <tr>
-                <td>{{ medicine.id }}</td>
-                <td>{{ medicine.name }}</td>
-                <td>{{ medicine.category }}</td>
-                <td>{{ medicine.stock }}</td>
-                <td>{{ medicine.price }}</td>
-                <td>{{ medicine.expiry_date }}</td>
-
-                <td>
-                    <a href="{% url 'edit_medicine' medicine.id %}">
-                        Edit
-                    </a>
-
-                    <a href="{% url 'delete_medicine' medicine.id %}">
-                        Delete
-                    </a>
-                </td>
-            </tr>
-
-            {% empty %}
-
-            <tr>
-                <td colspan="7">No medicines found.</td>
-            </tr>
-
-            {% endfor %}
-
-        </tbody>
-
-    </table>
+    <tbody>
+        {% for medicine in medicines %}
+        <tr>
+            <td>{{ medicine.id }}</td>
+            <td>{{ medicine.name }}</td>
+            <td>{{ medicine.description|default:"—" }}</td>
+            <td>{{ medicine.stock_quantity }}</td>
+            <td>{{ medicine.price }}</td>
+            <td>{{ medicine.expiry_date|default:"Not set" }}</td>
+            <td>
+                <a href="{% url 'edit_medicine' medicine.id %}">Edit</a>
+                <a href="{% url 'delete_medicine' medicine.id %}">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="7">No medicines found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 
 </section>
 

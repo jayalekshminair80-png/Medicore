@@ -1,4 +1,4 @@
-{% extends 'hospital/base.html' %}
+{% extends 'base.html' %}
 {% load static %}
 
 {% block title %}Billing | MediCore{% endblock %}
@@ -13,50 +13,37 @@
 
     <h1>Billing and Payments</h1>
 
-    <table>
+   <table>
+    <thead>
+        <tr>
+            <th>Bill ID</th>
+            <th>Patient</th>
+            <th>Bill Date</th>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Due Date</th>
+            <th>Status</th>
+        </tr>
+    </thead>
 
-        <thead>
-            <tr>
-                <th>Invoice ID</th>
-                <th>Patient</th>
-                <th>Date</th>
-                <th>Description</th>
-                <th>Total Amount</th>
-                <th>Payment Status</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-
-        <tbody>
-
-            {% for invoice in invoices %}
-
-            <tr>
-                <td>{{ invoice.id }}</td>
-                <td>{{ invoice.patient }}</td>
-                <td>{{ invoice.date }}</td>
-                <td>{{ invoice.description }}</td>
-                <td>₹{{ invoice.total_amount }}</td>
-                <td>{{ invoice.status }}</td>
-
-                <td>
-                    <a href="{% url 'invoice_detail' invoice.id %}">
-                        View Invoice
-                    </a>
-                </td>
-            </tr>
-
-            {% empty %}
-
-            <tr>
-                <td colspan="7">No invoices available.</td>
-            </tr>
-
-            {% endfor %}
-
-        </tbody>
-
-    </table>
+    <tbody>
+        {% for bill in bills %}
+        <tr>
+            <td>{{ bill.id }}</td>
+            <td>{{ bill.patient.full_name }}</td>
+            <td>{{ bill.bill_date }}</td>
+            <td>{{ bill.description }}</td>
+            <td>₹{{ bill.amount }}</td>
+            <td>{{ bill.due_date|default:"Not set" }}</td>
+            <td>{{ bill.status }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="7">No bills available.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 
 </section>
 

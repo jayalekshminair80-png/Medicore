@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Register Emergency Case | MediCore{% endblock %}
+
+{% block content %}
+<section class="emergency-section">
+    <h1>Register Emergency Case</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Register Case</button>
+    </form>
+
+    <p><a href="{% url 'emergency' %}">Back to Emergency Management</a></p>
+</section>
+{% endblock %}

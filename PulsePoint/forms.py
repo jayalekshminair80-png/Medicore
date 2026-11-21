@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django import forms
 import re
-from . models import RegisterModel
+from . models import EmergencyCase, Medicine, RegisterModel,Appointment,Doctor,Bed
 from datetime import date
 
 class RegisterForm(forms.ModelForm):
@@ -9,7 +9,7 @@ class RegisterForm(forms.ModelForm):
 
     class Meta:
         model = RegisterModel
-        fields = [ 'full_name', 'username', 'email', 'phone', 'password']
+        fields = ['profile', 'full_name', 'username', 'email', 'phone', 'password']
         
     def clean(self):
         cleaned_data = super().clean()
@@ -86,3 +86,57 @@ class LoginForm(forms.Form):
             if user and user.password != password:
                 self.add_error('password', "Incorrect password.")
         return cleaned_data
+
+
+class AppointmentForm(forms.ModelForm):
+    doctor_name = forms.ChoiceField(choices=[])
+
+    class Meta:
+        model = Appointment
+        fields = ["doctor_name", "appointment_date", "reason"]
+        widgets = {
+            "appointment_date": forms.DateTimeInput(
+                attrs={"type": "datetime-local"},
+                format="%Y-%m-%dT%H:%M"
+            )
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        doctors = Doctor.objects.filter(is_available=True).order_by("full_name")
+        self.fields["doctor_name"].choices = [
+            ("", "Choose a doctor")
+        ] + [
+            (str(doctor.id), f"Dr. {doctor.full_name} - {doctor.specialization}")
+            for doctor in doctors
+        ]
+
+
+class MedicineForm(forms.ModelForm):
+    class Meta:
+        model = Medicine
+        fields = ["name", "description", "price", "stock_quantity", "expiry_date"]
+        widgets = {
+            "expiry_date": forms.DateInput(attrs={"type": "date"})
+        }
+
+
+
+
+class BedForm(forms.ModelForm):
+    class Meta:
+        model = Bed
+        fields = ["bed_number", "ward", "bed_type", "status"]
+
+
+class EmergencyCaseForm(forms.ModelForm):
+    class Meta:
+        model = EmergencyCase
+        fields = [
+            "patient",
+            "patient_name",
+            "contact_phone",
+            "description",
+            "priority",
+        ]

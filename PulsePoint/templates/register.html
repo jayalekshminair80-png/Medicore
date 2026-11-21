@@ -1,4 +1,4 @@
-{% extends 'hospital/base.html' %}
+{% extends 'base.html' %}
 
 {% block title %}Register | MediCore{% endblock %}
 
@@ -28,6 +28,20 @@
         <p class="field-error">{{ error }}</p>
         {% endfor %}
 
+        <div>
+    <label for="profile">Profile Picture</label>
+    <input
+        type="file"
+        id="profile"
+        name="profile"
+        accept="image/*"
+    >
+    {% for error in form.profile.errors %}
+        <p class="field-error">{{ error }}</p>
+    {% endfor %}
+    </div>
+
+<br>
         <div>
             <label for="full_name">Full Name</label>
             <input

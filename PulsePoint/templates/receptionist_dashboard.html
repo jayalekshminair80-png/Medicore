@@ -1,11 +1,11 @@
-{% extends 'hospital/base.html' %}
+{% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Receptionist Dashboard | MediCore{% endblock %}}
+{% block title %}Receptionist Dashboard | MediCore{% endblock %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'hospital/css/receptionist_dashboard.css' %}">
-{% endblock %}}
+<link rel="stylesheet" href="{% static 'css/receptionist_dashboard.css' %}">
+{% endblock %}
 
 {% block content %}
 
@@ -52,36 +52,30 @@
         <h2>Today's Appointments</h2>
 
         <table>
-            <thead>
-                <tr>
-                    <th>Patient</th>
-                    <th>Doctor</th>
-                    <th>Time</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
+    <thead>
+        <tr>
+            <th>Patient</th>
+            <th>Doctor</th>
+            <th>Time</th>
+            <th>Status</th>
+        </tr>
+    </thead>
 
-            <tbody>
-                {% for appointment in appointments %}
-                <tr>
-                    <td>{{ appointment.patient }}</td>
-                    <td>{{ appointment.doctor }}</td>
-                    <td>{{ appointment.time }}</td>
-                    <td>{{ appointment.status }}</td>
-                    <td>
-                        <a href="{% url 'appointment_detail' appointment.id %}">
-                            View
-                        </a>
-                    </td>
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="5">No appointments scheduled.</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+    <tbody>
+        {% for appointment in appointments %}
+        <tr>
+            <td>{{ appointment.patient.full_name }}</td>
+            <td>Dr. {{ appointment.doctor_name }}</td>
+            <td>{{ appointment.appointment_date|time:"g:i A" }}</td>
+            <td>{{ appointment.status }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">No appointments scheduled for today.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
     </section>
 
 </section>

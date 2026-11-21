@@ -1,5 +1,7 @@
 from django.urls import path
 from PulsePoint import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     # Main Views
@@ -24,7 +26,7 @@ urlpatterns = [
     path('doctors/', views.doctors, name='doctors'),
 
     # Template Action & Detail URL placeholders to prevent NoReverseMatch
-    path('patients/', views.placeholder_action, name='patient_list'),
+    path('patients/', views.patient_list, name='patient_list'),
     path('patients/register/', views.placeholder_action, name='patient_registration'),
     path('patients/checkin/', views.placeholder_action, name='patient_checkin'),
     path('patients/profile/edit/', views.placeholder_action, name='edit_patient_profile'),
@@ -39,11 +41,12 @@ urlpatterns = [
     path('departments/', views.placeholder_action, name='department_list'),
     path('appointments/', views.placeholder_action, name='appointment_list'),
     path('appointments/<int:id>/', views.placeholder_action, name='appointment_detail'),
+    path('appointments/<int:appointment_id>/cancel/',views.cancel_appointment, name='cancel_appointment'),
     path('analytics/', views.placeholder_action, name='analytics'),
-    path('beds/add/', views.placeholder_action, name='add_bed'),
-    path('beds/edit/<int:id>/', views.placeholder_action, name='edit_bed'),
+    path('beds/add/', views.add_bed, name='add_bed'),   
+    path('beds/edit/<int:id>/', views.edit_bed, name='edit_bed'),
     path('billing/invoice/<int:id>/', views.placeholder_action, name='invoice_detail'),
-    path('emergency/register/', views.placeholder_action, name='register_emergency'),
+    path('emergency/register/', views.register_emergency, name='register_emergency'),
     path('emergency/<int:id>/', views.placeholder_action, name='emergency_detail'),
     path('lab/requests/', views.placeholder_action, name='lab_requests'),
     path('lab/sample/register/', views.placeholder_action, name='sample_registration'),
@@ -51,11 +54,13 @@ urlpatterns = [
     path('lab/report/upload/', views.placeholder_action, name='upload_report'),
     path('lab/tests/completed/', views.placeholder_action, name='completed_tests'),
     path('pharmacy/medicines/', views.placeholder_action, name='medicine_list'),
-    path('pharmacy/medicine/add/', views.placeholder_action, name='add_medicine'),
-    path('pharmacy/medicine/edit/<int:id>/', views.placeholder_action, name='edit_medicine'),
-    path('pharmacy/medicine/delete/<int:id>/', views.placeholder_action, name='delete_medicine'),
+    path('pharmacy/medicine/add/', views.add_medicine, name='add_medicine'),
+    path('pharmacy/medicine/edit/<int:id>/', views.edit_medicine, name='edit_medicine'),
+    path('pharmacy/medicine/delete/<int:id>/', views.delete_medicine, name='delete_medicine'),
     path('pharmacy/prescriptions/', views.placeholder_action, name='pharmacy_prescriptions'),
     path('pharmacy/stock/', views.placeholder_action, name='stock_management'),
     path('pharmacy/expiry/', views.placeholder_action, name='expiry_management'),
     path('pharmacy/sales/', views.placeholder_action, name='pharmacy_sales'),
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

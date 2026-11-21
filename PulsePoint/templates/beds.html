@@ -1,4 +1,4 @@
-{% extends 'hospital/base.html' %}
+{% extends 'base.html' %}
 {% load static %}
 
 {% block title %}Bed Management | MediCore{% endblock %}
@@ -16,48 +16,36 @@
     <a href="{% url 'add_bed' %}">Add New Bed</a>
 
     <table>
+    <thead>
+        <tr>
+            <th>Bed ID</th>
+            <th>Bed Number</th>
+            <th>Ward</th>
+            <th>Bed Type</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
 
-        <thead>
-            <tr>
-                <th>Bed ID</th>
-                <th>Room Number</th>
-                <th>Room Type</th>
-                <th>Floor</th>
-                <th>Status</th>
-                <th>Patient</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-
-        <tbody>
-
-            {% for bed in beds %}
-
-            <tr>
-                <td>{{ bed.id }}</td>
-                <td>{{ bed.room_number }}</td>
-                <td>{{ bed.room_type }}</td>
-                <td>{{ bed.floor }}</td>
-                <td>{{ bed.status }}</td>
-                <td>{{ bed.patient|default:"Not Assigned" }}</td>
-
-                <td>
-                    <a href="{% url 'edit_bed' bed.id %}">Edit</a>
-                </td>
-            </tr>
-
-            {% empty %}
-
-            <tr>
-                <td colspan="7">No beds registered.</td>
-            </tr>
-
-            {% endfor %}
-
-        </tbody>
-
-    </table>
-
+    <tbody>
+        {% for bed in beds %}
+        <tr>
+            <td>{{ bed.id }}</td>
+            <td>{{ bed.bed_number }}</td>
+            <td>{{ bed.ward }}</td>
+            <td>{{ bed.bed_type }}</td>
+            <td>{{ bed.status }}</td>
+            <td>
+                 <a href="{% url 'edit_bed' bed.id %}">Edit</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6">No beds registered.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 </section>
 
 {% endblock %}

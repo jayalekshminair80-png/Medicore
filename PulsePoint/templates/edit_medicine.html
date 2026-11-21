@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Medicine | MediCore{% endblock %}
+
+{% block content %}
+<section class="pharmacy-section">
+    <h1>Edit {{ medicine.name }}</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save Changes</button>
+    </form>
+
+    <p><a href="{% url 'pharmacy' %}">Back to inventory</a></p>
+</section>
+{% endblock %}

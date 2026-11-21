@@ -1,4 +1,4 @@
-{% extends 'hospital/base.html' %}
+{% extends 'base.html' %}
 {% load static %}
 
 {% block title %}Book Appointment | MediCore{% endblock %}
@@ -14,37 +14,24 @@
     <h1>Book an Appointment</h1>
     <p>Schedule your consultation with our doctors.</p>
 
-    <form method="POST">
-        {% csrf_token %}
 
-        <label for="doctor">Select Doctor</label>
-        <select name="doctor" id="doctor" required>
-            <option value="">Choose a doctor</option>
-            {% for doctor in doctors %}
-            <option value="{{ doctor.id }}">
-                Dr. {{ doctor.user.get_full_name }} - {{ doctor.specialization }}
-            </option>
-            {% endfor %}
-        </select>
+<form method="POST">
+    {% csrf_token %}
 
-        <label for="date">Appointment Date</label>
-        <input type="date" name="date" id="date" required>
+    <label for="{{ form.doctor_name.id_for_label }}">Doctor's Name</label>
+    {{ form.doctor_name }}
+    {{ form.doctor_name.errors }}
 
-        <label for="time">Appointment Time</label>
-        <select name="time" id="time" required>
-            <option value="">Select time</option>
-            {% for slot in available_slots %}
-            <option value="{{ slot }}">{{ slot }}</option>
-            {% endfor %}
-        </select>
+    <label for="{{ form.appointment_date.id_for_label }}">Appointment Date and Time</label>
+    {{ form.appointment_date }}
+    {{ form.appointment_date.errors }}
 
-        <label for="reason">Reason for Appointment</label>
-        <textarea name="reason" id="reason"
-                  placeholder="Describe your concern" required></textarea>
+    <label for="{{ form.reason.id_for_label }}">Reason for Appointment</label>
+    {{ form.reason }}
+    {{ form.reason.errors }}
 
-        <button type="submit">Book Appointment</button>
-
-    </form>
+    <button type="submit">Book Appointment</button>
+</form>
 
 </section>
 

@@ -1,4 +1,4 @@
-{% extends 'hospital/base.html' %}
+{% extends 'base.html' %}
 {% load static %}
 
 {% block title %}Emergency Management | MediCore{% endblock %}
@@ -18,49 +18,36 @@
     </a>
 
     <table>
+    <thead>
+        <tr>
+            <th>Case ID</th>
+            <th>Patient Name</th>
+            <th>Contact Number</th>
+            <th>Description</th>
+            <th>Priority</th>
+            <th>Status</th>
+            <th>Reported</th>
+        </tr>
+    </thead>
 
-        <thead>
-            <tr>
-                <th>Case ID</th>
-                <th>Patient Name</th>
-                <th>Contact Number</th>
-                <th>Priority</th>
-                <th>Assigned Department</th>
-                <th>Case Status</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-
-        <tbody>
-
-            {% for case in emergency_cases %}
-
-            <tr>
-                <td>{{ case.id }}</td>
-                <td>{{ case.patient_name }}</td>
-                <td>{{ case.contact_number }}</td>
-                <td>{{ case.priority }}</td>
-                <td>{{ case.department }}</td>
-                <td>{{ case.status }}</td>
-
-                <td>
-                    <a href="{% url 'emergency_detail' case.id %}">
-                        View Details
-                    </a>
-                </td>
-            </tr>
-
-            {% empty %}
-
-            <tr>
-                <td colspan="7">No emergency cases available.</td>
-            </tr>
-
-            {% endfor %}
-
-        </tbody>
-
-    </table>
+    <tbody>
+        {% for case in cases %}
+        <tr>
+            <td>{{ case.id }}</td>
+            <td>{{ case.patient_name }}</td>
+            <td>{{ case.contact_phone|default:"Not provided" }}</td>
+            <td>{{ case.description }}</td>
+            <td>{{ case.priority }}</td>
+            <td>{{ case.status }}</td>
+            <td>{{ case.reported_at }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="7">No emergency cases available.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 
 </section>
 
