@@ -1,0 +1,86 @@
+
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Reports and Analytics | MediCore{% endblock %}
+
+{% block css %}
+
+
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/analytics.css' %}">
+<section class="analytics-section">
+    <h1>Reports and Analytics</h1>
+    <p>Summary of hospital activity and resources.</p>
+
+    <div class="analytics-grid">
+        <div class="analytics-card">
+            <h3>Patients</h3>
+            <p>{{ total_patients }}</p>
+        </div>
+        <div class="analytics-card">
+            <h3>Doctors</h3>
+            <p>{{ total_doctors }}</p>
+        </div>
+        <div class="analytics-card">
+            <h3>Staff</h3>
+            <p>{{ total_staff }}</p>
+        </div>
+        <div class="analytics-card">
+            <h3>Appointments</h3>
+            <p>{{ total_appointments }}</p>
+        </div>
+        <div class="analytics-card">
+            <h3>Lab Reports</h3>
+            <p>{{ total_lab_reports }}</p>
+        </div>
+        <div class="analytics-card">
+            <h3>Medicines</h3>
+            <p>{{ total_medicines }}</p>
+        </div>
+    </div>
+
+    <div class="analytics-panels">
+        <div class="analytics-panel">
+            <h2>Appointment Status</h2>
+            <table>
+                <tr><th>Status</th><th>Count</th></tr>
+                <tr><td>Scheduled</td><td>{{ scheduled_appointments }}</td></tr>
+                <tr><td>Completed</td><td>{{ completed_appointments }}</td></tr>
+                <tr><td>Cancelled</td><td>{{ cancelled_appointments }}</td></tr>
+            </table>
+        </div>
+
+        <div class="analytics-panel">
+            <h2>Bed Availability</h2>
+            <table>
+                <tr><th>Status</th><th>Count</th></tr>
+                <tr><td>Available</td><td>{{ available_beds }}</td></tr>
+                <tr><td>Occupied</td><td>{{ occupied_beds }}</td></tr>
+                <tr><td>Maintenance</td><td>{{ maintenance_beds }}</td></tr>
+            </table>
+        </div>
+
+        <div class="analytics-panel">
+            <h2>Billing Summary</h2>
+            <table>
+                <tr><th>Measure</th><th>Value</th></tr>
+                <tr><td>Paid bills</td><td>{{ paid_bills }}</td></tr>
+                <tr><td>Pending bills</td><td>{{ pending_bills }}</td></tr>
+                <tr><td>Total billed</td><td>{{ total_billed_amount|floatformat:2 }}</td></tr>
+                <tr><td>Pending amount</td><td>{{ pending_amount|floatformat:2 }}</td></tr>
+            </table>
+        </div>
+
+        <div class="analytics-panel">
+            <h2>Emergency Cases</h2>
+            <table>
+                <tr><th>Status</th><th>Count</th></tr>
+                <tr><td>Open or in progress</td><td>{{ open_emergencies }}</td></tr>
+                <tr><td>Resolved</td><td>{{ resolved_emergencies }}</td></tr>
+            </table>
+        </div>
+    </div>
+</section>
+{% endblock %}

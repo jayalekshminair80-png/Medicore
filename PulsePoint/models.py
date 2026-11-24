@@ -206,3 +206,37 @@ class EmergencyCase(models.Model):
 
     def __str__(self):
         return f"{self.patient_name} - {self.priority}"
+
+
+
+class StaffMember(models.Model):
+    full_name = models.CharField(max_length=100)
+    role = models.CharField(max_length=100)
+    email = models.EmailField(blank=True)
+    phone = models.CharField(max_length=15, blank=True)
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f"{self.full_name} - {self.role}"
+
+
+
+class Department(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    description = models.TextField(blank=True)
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.name
+
+
+
+class PendingRegistration(models.Model):
+    profile = models.ImageField(upload_to="profile_images/pending/")
+    full_name = models.CharField(max_length=100)
+    username = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone = models.CharField(max_length=10)
+    password = models.CharField(max_length=128)
+    otp_hash = models.CharField(max_length=128)
+    created_at = models.DateTimeField(auto_now_add=True)

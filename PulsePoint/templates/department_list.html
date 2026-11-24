@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Department Management</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add Department</button>
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>Department</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th colspan="2">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for department in departments %}
+        <tr>
+            <td>{{ department.name }}</td>
+            <td>{{ department.description|default:"—" }}</td>
+            <td>{% if department.is_active %}Active{% else %}Inactive{% endif %}</td>
+            <td>
+                <a href="{% url 'department_edit' department.pk %}">Edit</a>
+
+            </td>
+            <td>
+                <a href="{% url 'department_delete' department.pk %}">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">No departments have been added yet.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

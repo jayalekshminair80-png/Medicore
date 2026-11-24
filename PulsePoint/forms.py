@@ -1,10 +1,9 @@
-from django.shortcuts import render,redirect,get_object_or_404
 from django import forms
 import re
-from . models import EmergencyCase, Medicine, RegisterModel,Appointment,Doctor,Bed
-from datetime import date
+from . models import Department, EmergencyCase, Medicine, RegisterModel,Appointment,Doctor,Bed, StaffMember
 
 class RegisterForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput)
     confirm_password = forms.CharField(widget=forms.PasswordInput)
 
     class Meta:
@@ -54,38 +53,19 @@ class RegisterForm(forms.ModelForm):
         return password
 
 
-
 class LoginForm(forms.Form):
-
     username = forms.CharField(
-        widget=forms.TextInput(attrs={
-            'placeholder': 'Enter username'
-        })
+        widget=forms.TextInput(attrs={"placeholder": "Enter username"})
     )
-
     password = forms.CharField(
-        widget=forms.PasswordInput(attrs={
-            'placeholder': 'Enter password'
-        })
+        widget=forms.PasswordInput(attrs={"placeholder": "Enter password"})
     )
 
     def clean_username(self):
-            username=self.cleaned_data.get('username')
-
-            user=RegisterModel.objects.filter(username=username).first()
-            if user is None:
-                raise forms.ValidationError("User with this username does not exist.")
-            return username
-
-    def clean(self):
-        cleaned_data = super().clean()
-        username = cleaned_data.get('username')
-        password = cleaned_data.get('password')
-        if username and password:
-            user = RegisterModel.objects.filter(username=username).first()
-            if user and user.password != password:
-                self.add_error('password', "Incorrect password.")
-        return cleaned_data
+        username = self.cleaned_data["username"]
+        if not RegisterModel.objects.filter(username=username).exists():
+            raise forms.ValidationError("User with this username does not exist.")
+        return username
 
 
 class AppointmentForm(forms.ModelForm):
@@ -140,3 +120,34 @@ class EmergencyCaseForm(forms.ModelForm):
             "description",
             "priority",
         ]
+
+
+class StaffMemberForm(forms.ModelForm):
+    class Meta:
+        model = StaffMember
+        fields = ["full_name", "role", "email", "phone", "is_active"]
+
+
+class DepartmentForm(forms.ModelForm):
+    class Meta:
+        model = Department
+        fields = ["name", "description", "is_active"]
+
+
+class AppointmentStatusForm(forms.ModelForm):
+    class Meta:
+        model = Appointment
+        fields = ["status"]
+
+
+
+class OTPVerificationForm(forms.Form):
+    otp = forms.CharField(
+        label="Email OTP",
+        min_length=6,
+        max_length=6,
+        widget=forms.TextInput(attrs={
+            "autocomplete": "one-time-code",
+            "inputmode": "numeric",
+        }),
+    )
