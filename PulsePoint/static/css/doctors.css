@@ -11,7 +11,7 @@
 }
 
 .doctors-section h1 {
-  font-size: 2.3rem;
+  font-size: clamp(1.6rem, 5vw, 2.3rem);
   font-weight: 800;
   color: var(--text-main);
   letter-spacing: -0.035em;
@@ -40,17 +40,19 @@
 .doctors-section form select {
   margin-bottom: 0;
   flex: 1;
+  min-height: 44px;
 }
 
 .doctors-section form button[type="submit"] {
   padding: 13px 28px;
+  min-height: 44px;
   white-space: nowrap;
 }
 
 /* Doctors Card Grid */
 .doctor-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
   gap: 28px;
   margin-top: 12px;
 }
@@ -121,6 +123,7 @@
 .doctor-card a {
   width: 100%;
   padding: 12px 20px;
+  min-height: 44px;
   background: linear-gradient(135deg, var(--primary) 0%, #0369a1 100%);
   color: #ffffff;
   font-size: 0.9rem;
@@ -138,11 +141,29 @@
 .doctor-card a:hover {
   background: linear-gradient(135deg, var(--primary-hover) 0%, #075985 100%);
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(2, 132, 199, 0.35);
+  color: #ffffff;
 }
 
-@media (max-width: 650px) {
+@media (max-width: 768px) {
   .doctors-section form {
     flex-direction: column;
+    align-items: stretch;
+    padding: 18px 16px;
+    gap: 12px;
+  }
+
+  .doctors-section form input[type="text"],
+  .doctors-section form select,
+  .doctors-section form button[type="submit"] {
+    width: 100%;
+  }
+
+  .doctor-container {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .doctor-card {
+    padding: 24px 18px;
   }
 }

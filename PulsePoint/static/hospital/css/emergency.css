@@ -1,0 +1,88 @@
+/* ==========================================================================
+   PULSEPOINT / MEDICORE - PREMIUM EMERGENCY (emergency.css)
+   ========================================================================== */
+
+@import url('base.css');
+
+.emergency-section {
+  background: var(--bg-card);
+  padding: 40px;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-md);
+  border-top: 5px solid var(--danger);
+  position: relative;
+}
+
+.emergency-section h1 {
+  font-size: clamp(1.5rem, 5vw, 2.1rem);
+  font-weight: 800;
+  color: var(--danger-dark);
+  letter-spacing: -0.03em;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.emergency-section > a[href*="register_emergency"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(135deg, var(--danger) 0%, #b91c1c 100%);
+  color: #ffffff;
+  font-size: 0.92rem;
+  font-weight: 700;
+  padding: 13px 26px;
+  min-height: 46px;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: var(--transition-normal);
+  margin-bottom: 28px;
+  box-shadow: 0 4px 14px rgba(239, 68, 68, 0.4);
+}
+
+.emergency-section > a[href*="register_emergency"]:hover {
+  background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(239, 68, 68, 0.5);
+  color: #ffffff;
+}
+
+.emergency-section table td a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  min-height: 38px;
+  background-color: var(--danger-50);
+  color: var(--danger-dark);
+  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: none;
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  transition: var(--transition-fast);
+}
+
+.emergency-section table td a:hover {
+  background-color: var(--danger);
+  color: #ffffff;
+  border-color: var(--danger);
+  box-shadow: 0 3px 8px rgba(239, 68, 68, 0.35);
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .emergency-section {
+    padding: 22px 16px;
+    border-radius: var(--radius-lg);
+  }
+
+  .emergency-section > a[href*="register_emergency"] {
+    display: flex;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}

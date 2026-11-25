@@ -4,10 +4,11 @@ from django.db.models import Sum
 from django.contrib.auth import authenticate, login as auth_login
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth import logout as auth_logout
 
 
 from PulsePoint.models import Bill, Department, EmergencyCase, Medicine, PendingRegistration, RegisterModel,Appointment,Doctor,MedicalRecord,Prescription,LabReport,Bed, StaffMember
-from . forms import AppointmentStatusForm, DepartmentForm, EmergencyCaseForm, OTPVerificationForm, RegisterForm,LoginForm,AppointmentForm,MedicineForm,BedForm,StaffMemberForm
+from . forms import AppointmentStatusForm, BillForm, DepartmentForm, EmergencyCaseForm, LabReportForm, OTPVerificationForm, RegisterForm,LoginForm,AppointmentForm,MedicineForm,BedForm,StaffMemberForm
 from django.utils import timezone
 
 
@@ -167,7 +168,6 @@ def beds(request):
 
 
 
-
 def billing(request):
     patient_id = request.session.get("patient_id")
 
@@ -185,6 +185,22 @@ def billing(request):
         {"patient": patient, "bills": bills}
     )
 
+@staff_member_required(login_url="admin_login")
+def admin_billing(request):
+    if request.method == "POST":
+        form = BillForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("admin_billing")
+    else:
+        form = BillForm()
+
+    bills = Bill.objects.select_related("patient").order_by("-bill_date")
+    return render(
+        request,
+        "admin_billing.html",
+        {"bills": bills, "form": form},
+    )
 
 
 def book_appointment(request):
@@ -697,13 +713,32 @@ def analytics(request):
 
 @staff_member_required(login_url="admin_login")
 def lab_requests(request):
-    reports = LabReport.objects.all().order_by("-report_date")
-    return render(request, "lab_reports.html", {"reports": reports})
-    
+    if request.method == "POST":
+        form = LabReportForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("lab_requests")
+    else:
+        form = LabReportForm()
+
+    reports = LabReport.objects.select_related("patient").order_by("-report_date")
+    return render(
+        request,
+        "admin_lab_reports.html",
+        {"reports": reports, "form": form},
+    )
 
 
+def admin_logout(request):
+    if request.method == "POST":
+        auth_logout(request)
+    return redirect("admin_login")
 
 
+def patient_logout(request):
+    if request.method == "POST":
+        request.session.pop("patient_id", None)
+    return redirect("login")
 
 
 

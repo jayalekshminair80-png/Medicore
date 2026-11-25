@@ -13,7 +13,7 @@
 }
 
 .lab-reports h1 {
-  font-size: 2.1rem;
+  font-size: clamp(1.5rem, 5vw, 2.1rem);
   font-weight: 800;
   color: var(--text-main);
   letter-spacing: -0.03em;
@@ -23,7 +23,9 @@
 .lab-reports table td a {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   padding: 8px 16px;
+  min-height: 38px;
   background-color: var(--accent-light);
   color: #3730a3;
   border-radius: var(--radius-sm);
@@ -40,4 +42,11 @@
   border-color: var(--accent);
   box-shadow: 0 3px 8px rgba(99, 102, 241, 0.35);
   text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .lab-reports {
+    padding: 22px 16px;
+    border-radius: var(--radius-lg);
+  }
 }

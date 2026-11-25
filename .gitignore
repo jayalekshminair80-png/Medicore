@@ -1,0 +1,23 @@
+# Ignore Django settings
+*/settings.py
+
+# Python cache files
+_pycache_/
+*.py[cod]
+
+# Virtual environment
+venv/
+env/
+.venv/
+
+# Database
+db.sqlite3
+
+# Environment variables
+.env
+
+# Media files
+media/
+
+# IDE files
+.vscode/

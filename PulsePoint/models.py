@@ -9,8 +9,10 @@ class RegisterModel(models.Model):
     phone=models.CharField(max_length=10)
     password=models.CharField(max_length=128)
 
-    def str(self):
-        return self.username
+    def __str__(self):
+        if self.full_name and self.username and self.full_name != self.username:
+            return f"{self.full_name} ({self.username})"
+        return self.full_name or self.username or self.email or f"Patient #{self.id}"
 
 
 
@@ -240,3 +242,6 @@ class PendingRegistration(models.Model):
     password = models.CharField(max_length=128)
     otp_hash = models.CharField(max_length=128)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.full_name} ({self.email})"

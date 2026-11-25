@@ -1,0 +1,115 @@
+/* ==========================================================================
+   PULSEPOINT / MEDICORE - PREMIUM PATIENT PROFILE (patient_profile.css)
+   Mobile & Desktop Responsive
+   ========================================================================== */
+
+@import url('base.css');
+
+.profile-section {
+  max-width: 720px;
+  width: 100%;
+  margin: 30px auto 80px auto;
+  box-sizing: border-box;
+}
+
+.profile-section h1 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--text-main);
+  letter-spacing: -0.03em;
+  margin-bottom: 28px;
+}
+
+.profile-details {
+  background: var(--bg-card);
+  padding: 44px 40px;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-lg);
+  border-top: 5px solid var(--primary);
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.profile-details h2 {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 24px;
+  padding-bottom: 14px;
+  border-bottom: 1.5px solid var(--border-light);
+  letter-spacing: -0.02em;
+}
+
+.profile-details p {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px dashed var(--border-light);
+  font-size: 0.96rem;
+  color: var(--text-main);
+  gap: 16px;
+  word-break: break-word;
+}
+
+.profile-details p strong {
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.92rem;
+  min-width: 120px;
+  flex-shrink: 0;
+}
+
+.profile-details a[href*="edit_patient_profile"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--primary) 0%, #0369a1 100%);
+  color: #ffffff;
+  font-size: 0.92rem;
+  font-weight: 700;
+  padding: 13px 26px;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: var(--transition-normal);
+  margin-top: 32px;
+  box-shadow: 0 4px 14px var(--primary-glow);
+  min-height: 48px;
+}
+
+.profile-details a[href*="edit_patient_profile"]:hover {
+  background: linear-gradient(135deg, var(--primary-hover) 0%, #075985 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(2, 132, 199, 0.4);
+}
+
+@media (max-width: 600px) {
+  .profile-section h1 {
+    font-size: 1.85rem;
+  }
+
+  .profile-details {
+    padding: 30px 20px;
+    border-radius: var(--radius-lg);
+  }
+
+  .profile-details p {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 10px 0;
+  }
+
+  .profile-details p strong {
+    min-width: auto;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .profile-details a[href*="edit_patient_profile"] {
+    width: 100%;
+  }
+}

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Billing Management | MediCore{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/billing.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="billing-section">
+    <h1>Billing Management</h1>
+    
+    <h2>Add Bill</h2>
+    <form method="post" class="billing-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add Bill</button>
+    </form>
+
+    <h2>Existing Bills</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Patient</th>
+                <th>Description</th>
+                <th>Amount</th>
+                <th>Bill Date</th>
+                <th>Due Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for bill in bills %}
+            <tr>
+                <td>{{ bill.patient.full_name|default:bill.patient }}</td>
+                <td>{{ bill.description }}</td>
+                <td>₹{{ bill.amount }}</td>
+                <td>{{ bill.bill_date }}</td>
+                <td>{{ bill.due_date|default:"—" }}</td>
+                <td>{{ bill.status }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6">No bills found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}

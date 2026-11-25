@@ -1,0 +1,129 @@
+/* ==========================================================================
+   PULSEPOINT / MEDICORE - PREMIUM BOOK APPOINTMENT (book_appointment.css)
+   Mobile & Desktop Responsive
+   ========================================================================== */
+
+@import url('base.css');
+
+.appointment-section {
+  max-width: 660px;
+  width: 100%;
+  margin: 40px auto 80px auto;
+  background: var(--bg-card);
+  padding: 48px 44px;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-xl);
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.appointment-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+}
+
+.appointment-section h1 {
+  font-size: 2.1rem;
+  font-weight: 800;
+  color: var(--text-main);
+  text-align: center;
+  margin-bottom: 8px;
+  letter-spacing: -0.03em;
+}
+
+.appointment-section > p {
+  font-size: 0.96rem;
+  color: var(--text-muted);
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.appointment-section form {
+  padding: 0;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  width: 100%;
+}
+
+.appointment-section label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.appointment-section select,
+.appointment-section input[type="date"],
+.appointment-section textarea {
+  width: 100%;
+  padding: 13px 18px;
+  font-size: 0.95rem;
+  background-color: var(--bg-subtle);
+  border: 1.5px solid var(--border-light);
+  border-radius: var(--radius-md);
+  color: var(--text-main);
+  margin-bottom: 22px;
+  transition: var(--transition-normal);
+  box-sizing: border-box;
+  min-height: 48px;
+}
+
+.appointment-section textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.appointment-section select:focus,
+.appointment-section input[type="date"]:focus,
+.appointment-section textarea:focus {
+  background-color: #ffffff;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px var(--primary-glow);
+}
+
+.appointment-section button[type="submit"] {
+  width: 100%;
+  padding: 16px;
+  font-size: 1.02rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary) 0%, #0369a1 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  margin-top: 10px;
+  transition: var(--transition-normal);
+  box-shadow: 0 4px 14px var(--primary-glow);
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.appointment-section button[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(2, 132, 199, 0.4);
+}
+
+@media (max-width: 640px) {
+  .appointment-section {
+    padding: 36px 20px;
+    margin: 24px auto 60px auto;
+    border-radius: var(--radius-lg);
+  }
+
+  .appointment-section h1 {
+    font-size: 1.85rem;
+  }
+}

@@ -15,12 +15,59 @@
 
     {% include 'header.html' %}
 
-    <main>
+    <main id="mainContent">
         {% block content %}
         {% endblock %}
     </main>
 
     {% include 'footer.html' %}
 
+    <!-- Responsive Navigation & Table Handling Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Mobile Nav Toggle
+            var navToggle = document.getElementById('navToggle');
+            var primaryNav = document.getElementById('primaryNav');
+
+            if (navToggle && primaryNav) {
+                navToggle.addEventListener('click', function () {
+                    var expanded = navToggle.getAttribute('aria-expanded') === 'true';
+                    navToggle.setAttribute('aria-expanded', !expanded);
+                    navToggle.classList.toggle('active');
+                    primaryNav.classList.toggle('active');
+                });
+
+                // Close menu when clicking outside
+                document.addEventListener('click', function (e) {
+                    if (!navToggle.contains(e.target) && !primaryNav.contains(e.target) && primaryNav.classList.contains('active')) {
+                        navToggle.setAttribute('aria-expanded', 'false');
+                        navToggle.classList.remove('active');
+                        primaryNav.classList.remove('active');
+                    }
+                });
+
+                // Close menu when internal in-page hash links are tapped
+                var navLinks = primaryNav.querySelectorAll('a[href^="#"]');
+                navLinks.forEach(function (link) {
+                    link.addEventListener('click', function () {
+                        navToggle.setAttribute('aria-expanded', 'false');
+                        navToggle.classList.remove('active');
+                        primaryNav.classList.remove('active');
+                    });
+                });
+            }
+
+            // Auto-wrap tables without a responsive container to guarantee no horizontal overflow on mobile
+            var tables = document.querySelectorAll('main table');
+            tables.forEach(function (table) {
+                if (!table.parentElement.classList.contains('table-responsive') && !table.parentElement.classList.contains('table-container')) {
+                    var wrapper = document.createElement('div');
+                    wrapper.className = 'table-responsive';
+                    table.parentNode.insertBefore(wrapper, table);
+                    wrapper.appendChild(table);
+                }
+            });
+        });
+    </script>
 </body>
 </html>

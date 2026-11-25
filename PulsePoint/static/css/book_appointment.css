@@ -1,11 +1,13 @@
 /* ==========================================================================
    PULSEPOINT / MEDICORE - PREMIUM BOOK APPOINTMENT (book_appointment.css)
+   Mobile & Desktop Responsive
    ========================================================================== */
 
 @import url('base.css');
 
 .appointment-section {
   max-width: 660px;
+  width: 100%;
   margin: 40px auto 80px auto;
   background: var(--bg-card);
   padding: 48px 44px;
@@ -14,6 +16,7 @@
   box-shadow: var(--shadow-xl);
   position: relative;
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 .appointment-section::before {
@@ -47,6 +50,7 @@
   border: none;
   box-shadow: none;
   background: transparent;
+  width: 100%;
 }
 
 .appointment-section label {
@@ -71,6 +75,8 @@
   color: var(--text-main);
   margin-bottom: 22px;
   transition: var(--transition-normal);
+  box-sizing: border-box;
+  min-height: 48px;
 }
 
 .appointment-section textarea {
@@ -99,9 +105,25 @@
   margin-top: 10px;
   transition: var(--transition-normal);
   box-shadow: 0 4px 14px var(--primary-glow);
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .appointment-section button[type="submit"]:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 22px rgba(2, 132, 199, 0.4);
+}
+
+@media (max-width: 640px) {
+  .appointment-section {
+    padding: 36px 20px;
+    margin: 24px auto 60px auto;
+    border-radius: var(--radius-lg);
+  }
+
+  .appointment-section h1 {
+    font-size: 1.85rem;
+  }
 }

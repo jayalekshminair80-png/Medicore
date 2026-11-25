@@ -1,0 +1,159 @@
+/* ==========================================================================
+   PULSEPOINT / MEDICORE - PREMIUM REPORTS & ANALYTICS (analytics.css)
+   ========================================================================== */
+
+@import url('base.css');
+
+.analytics-section {
+  max-width: 1100px;
+  margin: 36px auto;
+  padding: 0 4px;
+}
+
+.analytics-section > h1 {
+  font-size: clamp(1.6rem, 5vw, 2.3rem);
+  font-weight: 800;
+  color: var(--text-main);
+  letter-spacing: -0.035em;
+  margin-bottom: 8px;
+}
+
+.analytics-section > p {
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+}
+
+/* Metric KPI Grid */
+.analytics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  margin: 24px 0 36px;
+}
+
+.analytics-card {
+  padding: 24px 20px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-normal);
+  border-top: 4px solid var(--primary);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.analytics-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.analytics-card:nth-child(2) { border-top-color: var(--secondary); }
+.analytics-card:nth-child(3) { border-top-color: var(--accent); }
+.analytics-card:nth-child(4) { border-top-color: var(--success); }
+.analytics-card:nth-child(5) { border-top-color: var(--warning); }
+.analytics-card:nth-child(6) { border-top-color: var(--danger); }
+
+.analytics-card h3 {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+  margin-top: 0;
+}
+
+.analytics-card p {
+  margin: 0;
+  color: var(--text-main);
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+/* Data Breakdown Panels */
+.analytics-panels {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.analytics-panel {
+  padding: 28px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-xl);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-sm);
+}
+
+.analytics-panel h2 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-top: 0;
+  margin-bottom: 18px;
+  letter-spacing: -0.02em;
+}
+
+.analytics-panel table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.analytics-panel th,
+.analytics-panel td {
+  padding: 12px 10px;
+  border-bottom: 1px solid var(--border-light);
+  text-align: left;
+  font-size: 0.92rem;
+}
+
+.analytics-panel th {
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  background-color: var(--bg-subtle);
+}
+
+.analytics-panel td:last-child {
+  font-weight: 700;
+  color: var(--primary);
+}
+
+@media (max-width: 768px) {
+  .analytics-section {
+    margin: 24px auto;
+  }
+
+  .analytics-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin: 20px 0 28px;
+  }
+
+  .analytics-card {
+    padding: 18px 16px;
+  }
+
+  .analytics-panels {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .analytics-panel {
+    padding: 20px 16px;
+    border-radius: var(--radius-lg);
+  }
+}
+
+@media (max-width: 440px) {
+  .analytics-grid {
+    grid-template-columns: 1fr;
+  }
+}

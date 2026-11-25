@@ -13,22 +13,24 @@
 }
 
 .bed-management h1 {
-  font-size: 2.1rem;
+  font-size: clamp(1.5rem, 5vw, 2.1rem);
   font-weight: 800;
   color: var(--text-main);
   letter-spacing: -0.03em;
   margin-bottom: 24px;
 }
 
-.bed-management>a[href*="add_bed"] {
+.bed-management > a[href*="add_bed"] {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   background: linear-gradient(135deg, var(--primary) 0%, #0369a1 100%);
   color: #ffffff;
   font-size: 0.92rem;
   font-weight: 700;
   padding: 12px 24px;
+  min-height: 44px;
   border-radius: var(--radius-md);
   text-decoration: none;
   transition: var(--transition-normal);
@@ -36,16 +38,19 @@
   box-shadow: 0 4px 14px var(--primary-glow);
 }
 
-.bed-management>a[href*="add_bed"]:hover {
+.bed-management > a[href*="add_bed"]:hover {
   background: linear-gradient(135deg, var(--primary-hover) 0%, #075985 100%);
   transform: translateY(-2px);
   box-shadow: 0 8px 22px rgba(2, 132, 199, 0.4);
+  color: #ffffff;
 }
 
 .bed-management table td a {
   display: inline-flex;
   align-items: center;
-  padding: 7px 15px;
+  justify-content: center;
+  padding: 8px 16px;
+  min-height: 38px;
   background-color: var(--bg-subtle);
   border: 1px solid var(--border-light);
   color: var(--text-main);
@@ -61,4 +66,18 @@
   border-color: var(--primary);
   box-shadow: 0 2px 8px var(--primary-glow);
   text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .bed-management {
+    padding: 22px 16px;
+    border-radius: var(--radius-lg);
+  }
+
+  .bed-management > a[href*="add_bed"] {
+    display: flex;
+    width: 100%;
+    margin-bottom: 20px;
+    text-align: center;
+  }
 }

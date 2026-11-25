@@ -1,6 +1,6 @@
 from django import forms
 import re
-from . models import Department, EmergencyCase, Medicine, RegisterModel,Appointment,Doctor,Bed, StaffMember
+from . models import Bill, Department, EmergencyCase, LabReport, Medicine, RegisterModel,Appointment,Doctor,Bed, StaffMember
 
 class RegisterForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
@@ -140,6 +140,15 @@ class AppointmentStatusForm(forms.ModelForm):
         fields = ["status"]
 
 
+class BillForm(forms.ModelForm):
+    class Meta:
+        model = Bill
+        fields = ["patient", "description", "amount", "bill_date", "due_date", "status"]
+
+class LabReportForm(forms.ModelForm):
+    class Meta:
+        model = LabReport
+        fields = ["patient", "test_name", "report_date", "result", "notes"]
 
 class OTPVerificationForm(forms.Form):
     otp = forms.CharField(

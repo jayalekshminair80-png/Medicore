@@ -13,15 +13,22 @@
 }
 
 .medical-records h1 {
-  font-size: 2.1rem;
+  font-size: clamp(1.5rem, 5vw, 2.1rem);
   font-weight: 800;
   color: var(--text-main);
   letter-spacing: -0.03em;
   margin-bottom: 8px;
 }
 
-.medical-records>p {
+.medical-records > p {
   font-size: 0.98rem;
   color: var(--text-muted);
   margin-bottom: 28px;
+}
+
+@media (max-width: 768px) {
+  .medical-records {
+    padding: 22px 16px;
+    border-radius: var(--radius-lg);
+  }
 }
